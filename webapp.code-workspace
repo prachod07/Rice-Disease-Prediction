@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "C:/Users/91954/Desktop/Web Design/portfolio"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "portfolio",
+		"liveServer.settings.port": 5501
+	}
+}

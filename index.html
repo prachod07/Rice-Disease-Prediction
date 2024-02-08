@@ -1,0 +1,59 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Pest Prediction App</title>
+</head>
+<body>
+    <h1>Rice Pest Prediction</h1>
+
+    <!-- Form for user input -->
+    <form action="/predict" method="post">
+        <div class="user-input">
+            <label for="month">Select Month:</label>
+            <select name="month" id="month" required>
+                <!-- Add options for months (1-12) -->
+                {% for m in range(1, 13) %}
+                    <option value="{{ m }}">{{ m }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="stage_of_crop">Select Stage of Crop:</label>
+            <select name="stage_of_crop" id="stage_of_crop" required>
+                <!-- Add options for stages of crop -->
+                {% for stage, value in stage_of_crop_encoding.items() %}
+                    <option value="{{ stage }}">{{ stage }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="district">Select District:</label>
+            <select name="district" id="district" required>
+                <!-- Add options for districts -->
+                {% for district, value in district_encoding.items() %}
+                    <option value="{{ district }}">{{ district }}</option>
+                {% endfor %}
+            </select>
+
+            <button class="button" type="submit">Predict</button>
+        </div>
+    </form>
+
+    <!-- Display prediction result here -->
+    {% if pest_name %}
+        <div class="prediction-result">
+            <div class="result-details">
+                <p class="bold-text">Predicted Pest: {{ pest_name }}</p>
+                <img src="{{ url_for('static', filename='images/' + pest_image_filename) }}" alt="{{ pest_name }}" class="pest-image">
+            </div>
+            <div class="disease-info">
+                <p>Treatment for {{ pest_name }} includes: {{ disease_info.get(pest_name, 'Information not available.') }}</p>
+            </div>
+        </div>
+    {% endif %}
+
+</body>
+</html>
